@@ -1,0 +1,41 @@
+name: Daily Robotics Job Search
+
+on:
+  schedule:
+    # 8:00 PM IST = 14:30 UTC. GitHub cron runs a few minutes late sometimes — that's normal.
+    - cron: "30 14 * * *"
+  workflow_dispatch: {}   # lets you click "Run workflow" manually to test
+
+permissions:
+  contents: write   # needed so the workflow can commit jobs.json back to the repo
+
+jobs:
+  search-and-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run job search and send email
+        env:
+          JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: python job_search.py
+
+      - name: Commit updated jobs.json
+        run: |
+          git config user.name "robotics-job-bot"
+          git config user.email "actions@github.com"
+          git add docs/jobs.json
+          git diff --staged --quiet || git commit -m "Update jobs.json [automated]"
+          git push

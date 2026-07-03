@@ -1,0 +1,42 @@
+name: Generate Tailored Resume
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_title:
+        description: "Job title (copy from the daily email)"
+        required: true
+        type: string
+      company:
+        description: "Company name (optional)"
+        required: false
+        type: string
+      job_description:
+        description: "Paste the job description / requirements text"
+        required: true
+        type: string
+
+jobs:
+  build-and-email-resume:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build PDF and email it
+        env:
+          JOB_TITLE: ${{ github.event.inputs.job_title }}
+          COMPANY: ${{ github.event.inputs.company }}
+          JOB_DESCRIPTION: ${{ github.event.inputs.job_description }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RECIPIENT_EMAIL: ${{ secrets.RECIPIENT_EMAIL }}
+        run: python generate_resume.py

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robotics Job Bot — Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1316;
+    --panel: #161d21;
+    --panel-hover: #1b2327;
+    --border: #283136;
+    --text: #e7edf0;
+    --muted: #8b98a0;
+    --blue: #5aa9d6;
+    --amber: #e8a33d;
+    --green: #6fbf8b;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      linear-gradient(var(--border) 1px, transparent 1px) 0 0 / 100% 28px,
+      linear-gradient(90deg, var(--border) 1px, transparent 1px) 0 0 / 28px 100%,
+      var(--bg);
+    background-blend-mode: overlay, overlay, normal;
+    opacity: 1;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 28px 20px 80px; }
+
+  header { display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap:12px;}
+  .brand { display:flex; align-items:center; gap:10px; }
+  .brand-mark {
+    width: 34px; height: 34px; border: 1.5px solid var(--blue); border-radius: var(--radius);
+    display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color: var(--blue); flex-shrink:0;
+  }
+  h1 { font-family:'Space Grotesk', sans-serif; font-size: 20px; margin: 0; letter-spacing: 0.2px; }
+  .sub { color: var(--muted); font-family:'IBM Plex Mono', monospace; font-size: 12px; margin-top:2px; }
+
+  button, .btn {
+    font-family:'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    border-radius: var(--radius); border: 1px solid var(--border); background: var(--panel);
+    color: var(--text); padding: 8px 14px; cursor: pointer; transition: border-color .15s, background .15s;
+  }
+  button:hover, .btn:hover { background: var(--panel-hover); border-color: var(--blue); }
+  button:focus-visible, .btn:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--blue); outline-offset: 2px;
+  }
+  .btn-primary { background: var(--blue); color: #08141c; border-color: var(--blue); }
+  .btn-primary:hover { background: #6fb8e0; }
+  .btn-amber { background: var(--amber); color: #201200; border-color: var(--amber); }
+  .btn-amber:hover { background: #f0b458; }
+
+  section { margin-bottom: 30px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 20px; position: relative;
+  }
+  .panel::before, .panel::after {
+    content: ""; position: absolute; width: 8px; height: 8px; border: 1px solid var(--blue); opacity: .5;
+  }
+  .panel::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .panel::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .section-label {
+    font-family:'IBM Plex Mono', monospace; font-size: 11px; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; display:block;
+  }
+
+  .config-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .config-grid.full { grid-template-columns: 1fr; }
+  label { font-size: 12px; color: var(--muted); display:block; margin-bottom: 4px; }
+  input[type=text], input[type=password], textarea {
+    width: 100%; background: #0e1316; border: 1px solid var(--border); color: var(--text);
+    border-radius: var(--radius); padding: 8px 10px; font-family:'IBM Plex Mono', monospace; font-size: 13px;
+  }
+  .hint { font-size: 11.5px; color: var(--muted); margin-top: 8px; line-height:1.5; }
+  .hint a { color: var(--blue); }
+  .status-line { font-family:'IBM Plex Mono', monospace; font-size: 12px; margin-top:10px; min-height: 16px; }
+  .status-ok { color: var(--green); }
+  .status-err { color: #e07a6f; }
+  .status-wait { color: var(--amber); }
+
+  .job-card {
+    background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--blue);
+    border-radius: var(--radius); padding: 16px 18px; margin-bottom: 12px;
+  }
+  .job-top { display:flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .job-title { font-family:'Space Grotesk', sans-serif; font-size: 15.5px; font-weight: 600; }
+  .job-meta { color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+  .job-stipend {
+    font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--amber);
+    border: 1px solid #4a3a1f; background: #211a0d; padding: 2px 8px; border-radius: var(--radius);
+    height: fit-content; white-space: nowrap;
+  }
+  .job-jd { font-size: 13px; color: var(--text); opacity: .85; margin-top: 10px; line-height: 1.5; }
+  .job-actions { display:flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+
+  #jobList:empty::after,
+  .empty-note { color: var(--muted); font-family:'IBM Plex Mono', monospace; font-size: 13px; }
+
+  footer { text-align:center; color: var(--muted); font-family:'IBM Plex Mono', monospace; font-size: 11px; margin-top: 40px; }
+
+  details > summary { cursor: pointer; color: var(--blue); font-size: 12.5px; margin-top: 4px; list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::before { content: "▸ "; }
+  details[open] > summary::before { content: "▾ "; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <div class="brand-mark">R2</div>
+      <div>
+        <h1>Robotics Job Bot</h1>
+        <div class="sub">console · daily scan + on-demand resume tailoring</div>
+      </div>
+    </div>
+    <button id="toggleSettings" class="btn">⚙ Settings</button>
+  </header>
+
+  <section id="settingsPanel" class="panel" style="display:none;">
+    <span class="section-label">Connection</span>
+    <div class="config-grid">
+      <div>
+        <label for="ghOwner">GitHub username</label>
+        <input type="text" id="ghOwner" placeholder="e.g. nandanaa555">
+      </div>
+      <div>
+        <label for="ghRepo">Repo name</label>
+        <input type="text" id="ghRepo" placeholder="e.g. robotics-job-bot">
+      </div>
+    </div>
+    <div class="config-grid full">
+      <div>
+        <label for="ghToken">GitHub personal access token (fine-grained, scopes: Contents + Actions, read/write)</label>
+        <input type="password" id="ghToken" placeholder="ghp_...">
+      </div>
+    </div>
+    <button id="saveSettings" class="btn-primary" style="border:1px solid var(--blue);">Save settings</button>
+    <div class="hint">
+      Stored only in this browser's local storage — never sent anywhere except directly to GitHub's API.
+      Create a token at <a href="https://github.com/settings/personal-access-tokens/new" target="_blank">github.com/settings/personal-access-tokens</a>
+      scoped to just this repo, with <b>Contents: Read and write</b> and <b>Actions: Read and write</b> permissions.
+    </div>
+    <div id="settingsStatus" class="status-line"></div>
+  </section>
+
+  <section class="panel">
+    <span class="section-label">Your Resume</span>
+    <div id="resumeSummary" class="empty-note">Load settings above, then click "Load resume" to fetch it from your repo.</div>
+    <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;">
+      <button id="loadResume" class="btn">Load resume</button>
+      <button id="editResume" class="btn" style="display:none;">Edit resume (JSON)</button>
+    </div>
+    <div id="resumeEditor" style="display:none; margin-top:14px;">
+      <textarea id="resumeJson" rows="14" spellcheck="false"></textarea>
+      <div style="display:flex; gap:10px; margin-top:10px;">
+        <button id="saveResume" class="btn-primary" style="border:1px solid var(--blue);">Save to GitHub</button>
+        <button id="cancelEditResume" class="btn">Cancel</button>
+      </div>
+    </div>
+    <div id="resumeStatus" class="status-line"></div>
+  </section>
+
+  <section>
+    <span class="section-label" style="margin-left:2px;">Today's Matches</span>
+    <div id="jobsMeta" class="empty-note" style="margin: 6px 0 12px 2px;"></div>
+    <div id="jobList"></div>
+  </section>
+
+  <footer>runs daily at 20:00 IST via GitHub Actions · jobs.json last fetched client-side on page load</footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const API = "https://api.github.com";
+
+function getConfig() {
+  return {
+    owner: localStorage.getItem('gh_owner') || '',
+    repo: localStorage.getItem('gh_repo') || '',
+    token: localStorage.getItem('gh_token') || '',
+  };
+}
+
+function authHeaders(token) {
+  return { "Authorization": `Bearer ${token}`, "Accept": "application/vnd.github+json" };
+}
+
+// ---------- Settings ----------
+$('toggleSettings').onclick = () => {
+  const p = $('settingsPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+};
+
+(function initSettings() {
+  const c = getConfig();
+  $('ghOwner').value = c.owner;
+  $('ghRepo').value = c.repo;
+  $('ghToken').value = c.token;
+  if (!c.owner || !c.repo || !c.token) $('settingsPanel').style.display = 'block';
+})();
+
+$('saveSettings').onclick = () => {
+  localStorage.setItem('gh_owner', $('ghOwner').value.trim());
+  localStorage.setItem('gh_repo', $('ghRepo').value.trim());
+  localStorage.setItem('gh_token', $('ghToken').value.trim());
+  $('settingsStatus').textContent = '✓ Saved locally.';
+  $('settingsStatus').className = 'status-line status-ok';
+};
+
+// ---------- Resume ----------
+let resumeSha = null;
+
+$('loadResume').onclick = async () => {
+  const { owner, repo, token } = getConfig();
+  const status = $('resumeStatus');
+  if (!owner || !repo || !token) {
+    status.textContent = 'Fill in Settings first (owner, repo, token).';
+    status.className = 'status-line status-err';
+    return;
+  }
+  status.textContent = 'Loading...';
+  status.className = 'status-line status-wait';
+  try {
+    const res = await fetch(`${API}/repos/${owner}/${repo}/contents/resume_data.json`, { headers: authHeaders(token) });
+    if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+    const data = await res.json();
+    resumeSha = data.sha;
+    const decoded = decodeURIComponent(escape(atob(data.content)));
+    const parsed = JSON.parse(decoded);
+    $('resumeJson').value = JSON.stringify(parsed, null, 2);
+    $('resumeSummary').innerHTML =
+      `<b>${parsed.candidate.name}</b> — ${parsed.projects.length} projects, ${Object.keys(parsed.skills).length} skill categories on file.`;
+    $('editResume').style.display = 'inline-block';
+    status.textContent = '✓ Loaded from GitHub.';
+    status.className = 'status-line status-ok';
+  } catch (e) {
+    status.textContent = `Error: ${e.message}`;
+    status.className = 'status-line status-err';
+  }
+};
+
+$('editResume').onclick = () => { $('resumeEditor').style.display = 'block'; };
+$('cancelEditResume').onclick = () => { $('resumeEditor').style.display = 'none'; };
+
+$('saveResume').onclick = async () => {
+  const { owner, repo, token } = getConfig();
+  const status = $('resumeStatus');
+  let parsed;
+  try {
+    parsed = JSON.parse($('resumeJson').value);
+  } catch (e) {
+    status.textContent = 'Invalid JSON — fix syntax before saving.';
+    status.className = 'status-line status-err';
+    return;
+  }
+  status.textContent = 'Saving...';
+  status.className = 'status-line status-wait';
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(parsed, null, 2))));
+    const res = await fetch(`${API}/repos/${owner}/${repo}/contents/resume_data.json`, {
+      method: 'PUT',
+      headers: { ...authHeaders(token), 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'Update resume_data.json via dashboard',
+        content, sha: resumeSha,
+      }),
+    });
+    if (!res.ok) throw new Error(`GitHub API ${res.status}`);
+    const data = await res.json();
+    resumeSha = data.content.sha;
+    status.textContent = '✓ Saved. Future tailored resumes will use this version.';
+    status.className = 'status-line status-ok';
+    $('resumeEditor').style.display = 'none';
+  } catch (e) {
+    status.textContent = `Error: ${e.message}`;
+    status.className = 'status-line status-err';
+  }
+};
+
+// ---------- Jobs ----------
+async function loadJobs() {
+  const listEl = $('jobList');
+  const metaEl = $('jobsMeta');
+  try {
+    const res = await fetch('jobs.json?_=' + Date.now());
+    const data = await res.json();
+    if (!data.jobs || data.jobs.length === 0) {
+      metaEl.textContent = 'No jobs yet — the daily scan hasn\'t run, or found nothing new. Check back after 8pm IST.';
+      return;
+    }
+    metaEl.textContent = `${data.jobs.length} listings · last scanned ${new Date(data.fetched_at).toLocaleString()}`;
+    listEl.innerHTML = '';
+    data.jobs.forEach(job => listEl.appendChild(renderJobCard(job)));
+  } catch (e) {
+    metaEl.textContent = 'Could not load jobs.json yet. If you just set this up, it appears after the first scan runs.';
+  }
+}
+
+function renderJobCard(job) {
+  const card = document.createElement('div');
+  card.className = 'job-card';
+  card.innerHTML = `
+    <div class="job-top">
+      <div>
+        <div class="job-title">${escapeHtml(job.title)}</div>
+        <div class="job-meta">${escapeHtml(job.company)} · ${escapeHtml(job.location || '—')} · ${escapeHtml(job.source || '')}</div>
+      </div>
+      <div class="job-stipend">${escapeHtml(job.stipend)}</div>
+    </div>
+    <details>
+      <summary>Job description</summary>
+      <div class="job-jd">${escapeHtml(job.jd || 'No description available.')}</div>
+    </details>
+    <div class="job-actions">
+      <a class="btn" href="${job.link}" target="_blank">Open listing ↗</a>
+      <button class="btn-amber generate-btn">Generate tailored resume</button>
+      <span class="status-line gen-status"></span>
+    </div>
+  `;
+  card.querySelector('.generate-btn').onclick = (e) => triggerResumeGeneration(job, card.querySelector('.gen-status'));
+  return card;
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str ?? '';
+  return div.innerHTML;
+}
+
+async function triggerResumeGeneration(job, statusEl) {
+  const { owner, repo, token } = getConfig();
+  if (!owner || !repo || !token) {
+    statusEl.textContent = 'Set up GitHub connection in Settings first.';
+    statusEl.className = 'status-line gen-status status-err';
+    return;
+  }
+  statusEl.textContent = 'Dispatching...';
+  statusEl.className = 'status-line gen-status status-wait';
+  try {
+    const res = await fetch(`${API}/repos/${owner}/${repo}/actions/workflows/generate-resume.yml/dispatches`, {
+      method: 'POST',
+      headers: { ...authHeaders(token), 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ref: 'main',
+        inputs: {
+          job_title: job.title,
+          company: job.company,
+          job_description: (job.jd || '').slice(0, 3000),
+        },
+      }),
+    });
+    if (!res.ok) throw new Error(`GitHub API ${res.status} — check token scopes / default branch name`);
+    statusEl.textContent = '✓ Triggered. Check your email in ~1 min.';
+    statusEl.className = 'status-line gen-status status-ok';
+  } catch (e) {
+    statusEl.textContent = `Error: ${e.message}`;
+    statusEl.className = 'status-line gen-status status-err';
+  }
+}
+
+loadJobs();
+</script>
+</body>
+</html>
