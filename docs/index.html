@@ -290,27 +290,46 @@ $('saveResume').onclick = async () => {
 };
 
 // ---------- Jobs ----------
+let allJobsData = [];
+let hideApplied = false;
+
 async function loadJobs() {
   const listEl = $('jobList');
   const metaEl = $('jobsMeta');
   try {
     const res = await fetch('jobs.json?_=' + Date.now());
     const data = await res.json();
-    if (!data.jobs || data.jobs.length === 0) {
+    allJobsData = data.jobs || [];
+    if (allJobsData.length === 0) {
       metaEl.textContent = 'No jobs yet — the daily scan hasn\'t run, or found nothing new. Check back after 8pm IST.';
       return;
     }
-    metaEl.textContent = `${data.jobs.length} listings · last scanned ${new Date(data.fetched_at).toLocaleString()}`;
-    listEl.innerHTML = '';
-    data.jobs.forEach(job => listEl.appendChild(renderJobCard(job)));
+    renderJobList(data.fetched_at);
   } catch (e) {
     metaEl.textContent = 'Could not load jobs.json yet. If you just set this up, it appears after the first scan runs.';
   }
 }
 
+function renderJobList(fetchedAt) {
+  const listEl = $('jobList');
+  const metaEl = $('jobsMeta');
+  const appliedCount = allJobsData.filter(j => j.applied).length;
+  const visible = hideApplied ? allJobsData.filter(j => !j.applied) : allJobsData;
+
+  metaEl.innerHTML = `${allJobsData.length} listings total (${appliedCount} applied) · last scanned ${new Date(fetchedAt).toLocaleString()}
+    &nbsp;·&nbsp; <label style="font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;">
+      <input type="checkbox" id="hideAppliedToggle" ${hideApplied ? 'checked' : ''}> hide applied
+    </label>`;
+  $('hideAppliedToggle').onchange = (e) => { hideApplied = e.target.checked; renderJobList(fetchedAt); };
+
+  listEl.innerHTML = '';
+  visible.forEach(job => listEl.appendChild(renderJobCard(job)));
+}
+
 function renderJobCard(job) {
   const card = document.createElement('div');
   card.className = 'job-card';
+  if (job.applied) card.style.opacity = '0.55';
   card.innerHTML = `
     <div class="job-top">
       <div>
@@ -326,11 +345,59 @@ function renderJobCard(job) {
     <div class="job-actions">
       <a class="btn" href="${job.link}" target="_blank">Open listing ↗</a>
       <button class="btn-amber generate-btn">Generate tailored resume</button>
+      <label style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;display:flex;align-items:center;gap:6px;cursor:pointer;">
+        <input type="checkbox" class="applied-checkbox" ${job.applied ? 'checked' : ''}> applied
+      </label>
       <span class="status-line gen-status"></span>
     </div>
   `;
-  card.querySelector('.generate-btn').onclick = (e) => triggerResumeGeneration(job, card.querySelector('.gen-status'));
+  card.querySelector('.generate-btn').onclick = () => triggerResumeGeneration(job, card.querySelector('.gen-status'));
+  card.querySelector('.applied-checkbox').onchange = (e) => toggleApplied(job.id, e.target.checked, card.querySelector('.gen-status'));
   return card;
+}
+
+async function toggleApplied(jobId, newValue, statusEl) {
+  const { owner, repo, token } = getConfig();
+  if (!owner || !repo || !token) {
+    statusEl.textContent = 'Set up GitHub connection in Settings first.';
+    statusEl.className = 'status-line gen-status status-err';
+    return;
+  }
+  statusEl.textContent = 'Saving...';
+  statusEl.className = 'status-line gen-status status-wait';
+  try {
+    // Fetch the freshest copy + sha before writing, to avoid clobbering other changes
+    const getRes = await fetch(`${API}/repos/${owner}/${repo}/contents/docs/jobs.json`, { headers: authHeaders(token) });
+    if (!getRes.ok) throw new Error(`GitHub API ${getRes.status}`);
+    const fileData = await getRes.json();
+    const decoded = decodeURIComponent(escape(atob(fileData.content)));
+    const parsed = JSON.parse(decoded);
+
+    const job = parsed.jobs.find(j => j.id === jobId);
+    if (!job) throw new Error('Job not found in remote file');
+    job.applied = newValue;
+
+    const newContent = btoa(unescape(encodeURIComponent(JSON.stringify(parsed, null, 2))));
+    const putRes = await fetch(`${API}/repos/${owner}/${repo}/contents/docs/jobs.json`, {
+      method: 'PUT',
+      headers: { ...authHeaders(token), 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `Mark job ${jobId} as ${newValue ? 'applied' : 'not applied'} via dashboard`,
+        content: newContent, sha: fileData.sha,
+      }),
+    });
+    if (!putRes.ok) throw new Error(`GitHub API ${putRes.status}`);
+
+    // reflect locally too, so the UI doesn't need a full reload
+    const local = allJobsData.find(j => j.id === jobId);
+    if (local) local.applied = newValue;
+
+    statusEl.textContent = '✓ Saved.';
+    statusEl.className = 'status-line gen-status status-ok';
+  } catch (e) {
+    statusEl.textContent = `Error: ${e.message}`;
+    statusEl.className = 'status-line gen-status status-err';
+  }
 }
 
 function escapeHtml(str) {
