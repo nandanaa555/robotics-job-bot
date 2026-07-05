@@ -9,16 +9,71 @@
   },
   "career_objective": "Dedicated Robotics and Automation student with hands-on experience in robotics, embedded systems, autonomous navigation, computer vision, and mechanical design. Experienced in developing intelligent robotic systems using ROS 2, Nav2 Stack, SLAM Toolbox, OpenCV, LiDAR integration, and Fusion 360 for robotic design and simulation. Passionate about robotics, automation, control systems, and innovative engineering solutions.",
   "education": [
-    { "degree": "B.Tech in Robotics and Automation", "school": "REVA University, Bangalore", "detail": "Expected May 2027 · CGPA: 9.4 (till 5th semester)" },
-    { "degree": "Pre-University Course (PCMB)", "school": "Karnataka State Board", "detail": "May 2023 · 96.5%" },
-    { "degree": "SSLC", "school": "Karnataka Secondary Education Examination Board", "detail": "July 2021 · 91.04%" }
+    {
+      "degree": "B.Tech in Robotics and Automation",
+      "school": "REVA University, Bangalore",
+      "detail": "Expected May 2027 · CGPA: 9.4 (till 5th semester)"
+    },
+    {
+      "degree": "Pre-University Course (PCMB)",
+      "school": "Karnataka State Board",
+      "detail": "May 2023 · 96.5%"
+    },
+    {
+      "degree": "SSLC",
+      "school": "Karnataka Secondary Education Examination Board",
+      "detail": "July 2021 · 91.04%"
+    }
   ],
   "skills": {
-    "Simulation & Design": ["Fusion 360", "CAD Design", "3D Printing", "Gazebo Simulation", "RViz2 Visualization"],
-    "Programming & Embedded": ["Python", "Embedded C", "Assembly Language", "Raspberry Pi", "ESP32", "Arduino Nano", "PLC Programming"],
-    "Computer Vision & AI": ["OpenCV", "Image Processing", "Object Detection", "Sensor Fusion", "Webcam Integration"],
-    "Developer Tools": ["Linux (Ubuntu 24.04)", "Git", "GitHub", "VS Code", "ABB RobotStudio", "Google Colab"],
-    "Robotics": ["ROS 2 (Jazzy)", "Nav2 Stack", "ROS 2 Control", "MoveIt 2", "SLAM Toolbox", "Gazebo", "RViz2", "URDF/Xacro", "TF2", "Localization", "Mapping", "Path Planning", "Obstacle Avoidance", "Differential Drive Systems", "Manipulator Control"]
+    "Simulation & Design": [
+      "Fusion 360",
+      "CAD Design",
+      "3D Printing",
+      "Gazebo Simulation",
+      "RViz2 Visualization"
+    ],
+    "Programming & Embedded": [
+      "Python",
+      "Embedded C",
+      "Assembly Language",
+      "Raspberry Pi",
+      "ESP32",
+      "Arduino Nano",
+      "PLC Programming"
+    ],
+    "Computer Vision & AI": [
+      "OpenCV",
+      "Image Processing",
+      "Object Detection",
+      "Sensor Fusion",
+      "Webcam Integration"
+    ],
+    "Developer Tools": [
+      "Linux (Ubuntu 24.04)",
+      "Git",
+      "GitHub",
+      "VS Code",
+      "ABB RobotStudio",
+      "Google Colab"
+    ],
+    "Robotics": [
+      "ROS 2 (Jazzy)",
+      "Nav2 Stack",
+      "ROS 2 Control",
+      "MoveIt 2",
+      "SLAM Toolbox",
+      "Gazebo",
+      "RViz2",
+      "URDF/Xacro",
+      "TF2",
+      "Localization",
+      "Mapping",
+      "Path Planning",
+      "Obstacle Avoidance",
+      "Differential Drive Systems",
+      "Manipulator Control"
+    ]
   },
   "internship": {
     "company": "CropNow (Agricultural Startup)",
@@ -28,7 +83,14 @@
     "bullets": [
       "Developed ROS 2-based autonomous robotic systems integrating LiDAR perception, sensor fusion, localization, navigation, and embedded control for real-world field automation."
     ],
-    "tech": ["ROS 2", "LiDAR", "Sensor Fusion", "Autonomous Navigation", "Embedded Systems", "Python"]
+    "tech": [
+      "ROS 2",
+      "LiDAR",
+      "Sensor Fusion",
+      "Autonomous Navigation",
+      "Embedded Systems",
+      "Python"
+    ]
   },
   "projects": [
     {
@@ -37,7 +99,17 @@
       "bullets": [
         "Designed the robot chassis and 3-DOF robotic arm in Fusion 360 and developed ROS 2-based navigation, SLAM localization, and OpenCV-powered weed detection for precision agriculture applications."
       ],
-      "tech": ["Fusion 360", "ROS 2 Jazzy", "Nav2 Stack", "SLAM Toolbox", "OpenCV", "Python", "Raspberry Pi", "Embedded C", "3-DOF Robotic Arm"]
+      "tech": [
+        "Fusion 360",
+        "ROS 2 Jazzy",
+        "Nav2 Stack",
+        "SLAM Toolbox",
+        "OpenCV",
+        "Python",
+        "Raspberry Pi",
+        "Embedded C",
+        "3-DOF Robotic Arm"
+      ]
     },
     {
       "title": "Warehouse AMR Simulation using ROS 2 and Nav2",
@@ -45,7 +117,16 @@
       "bullets": [
         "Designed and simulated an Autonomous Mobile Robot (AMR) for warehouse logistics, implementing LiDAR-based localization, SLAM mapping, waypoint navigation, path planning, and obstacle avoidance using ROS 2 Jazzy and Nav2 Stack."
       ],
-      "tech": ["Fusion 360", "ROS 2 Jazzy", "Nav2 Stack", "SLAM Toolbox", "Gazebo", "RViz2", "LiDAR", "Python"]
+      "tech": [
+        "Fusion 360",
+        "ROS 2 Jazzy",
+        "Nav2 Stack",
+        "SLAM Toolbox",
+        "Gazebo",
+        "RViz2",
+        "LiDAR",
+        "Python"
+      ]
     },
     {
       "title": "ROS 2-Based Autonomous Environmental Monitoring Robot",
@@ -53,7 +134,16 @@
       "bullets": [
         "Developed a physical autonomous mobile robot for environmental monitoring, integrating ROS 2, LiDAR, sensor data acquisition, localization, navigation, and real-time obstacle avoidance for outdoor deployment."
       ],
-      "tech": ["Fusion 360", "ROS 2", "Nav2 Stack", "LiDAR", "Raspberry Pi", "Sensor Integration", "Python", "Embedded C"]
+      "tech": [
+        "Fusion 360",
+        "ROS 2",
+        "Nav2 Stack",
+        "LiDAR",
+        "Raspberry Pi",
+        "Sensor Integration",
+        "Python",
+        "Embedded C"
+      ]
     },
     {
       "title": "Robotic Arm Simulation – Franka Emika Panda with MoveIt 2",
@@ -61,7 +151,13 @@
       "bullets": [
         "Implemented motion planning, inverse kinematics, trajectory execution, and collision-aware manipulation for the Franka Emika Panda robotic arm using ROS 2 and MoveIt 2."
       ],
-      "tech": ["ROS 2", "MoveIt 2", "Gazebo", "RViz2", "Python"]
+      "tech": [
+        "ROS 2",
+        "MoveIt 2",
+        "Gazebo",
+        "RViz2",
+        "Python"
+      ]
     }
   ]
 }
