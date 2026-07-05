@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-05T10:03:53.522489+00:00",
+  "fetched_at": "2026-07-05T10:10:53.453962+00:00",
   "jobs": [
     {
       "id": "job-0",
@@ -53,22 +53,22 @@
     },
     {
       "id": "job-5",
-      "title": "Site Reliability Engineer II",
-      "company": "Mastercard",
-      "location": "India",
-      "stipend": "Not listed",
-      "jd": "&nbsp;...and services that help people, businesses and governments realize their greatest potential.  Title and Summary  Site Reliability <b>Engineer </b>II \r\n Who is Mastercard? \r\n At Mastercard technology, we work to connect and power an inclusive, digital economy that benefits everyone...&nbsp;",
-      "link": "https://jooble.org/jdp/4094782389540925500",
-      "source": "Indeed/Jooble"
-    },
-    {
-      "id": "job-6",
       "title": "Senior Site Reliability Engineer",
       "company": "Mastercard",
       "location": "India",
       "stipend": "Not listed",
       "jd": "&nbsp;...services that help people, businesses and governments realize their greatest potential.  Title and Summary  Senior Site Reliability <b>Engineer </b>\r\n Senior Site Reliability Engineer - SRE - Java/Spring Boot, Microservices \r\n Company: Mastercard \r\n Category: Software...&nbsp;",
       "link": "https://jooble.org/jdp/-4719015104680783727",
+      "source": "Indeed/Jooble"
+    },
+    {
+      "id": "job-6",
+      "title": "Site Reliability Engineer II",
+      "company": "Mastercard",
+      "location": "India",
+      "stipend": "Not listed",
+      "jd": "&nbsp;...and services that help people, businesses and governments realize their greatest potential.  Title and Summary  Site Reliability <b>Engineer </b>II \r\n Who is Mastercard? \r\n At Mastercard technology, we work to connect and power an inclusive, digital economy that benefits everyone...&nbsp;",
+      "link": "https://jooble.org/jdp/4094782389540925500",
       "source": "Indeed/Jooble"
     },
     {
@@ -97,12 +97,22 @@
       "company": "Mastercard",
       "location": "India",
       "stipend": "Not listed",
-      "jd": "&nbsp;...services that help people, businesses and governments realize their greatest potential.  Title and Summary  Lead Site Reliability <b>Engineer </b>\r\n Role Overview \r\n We are seeking a highly technical Lead Site Reliability Engineer (SRE) to architect, engineer, and operate highly...&nbsp;",
-      "link": "https://jooble.org/jdp/-2902300101303695425",
+      "jd": "&nbsp;...services that help people, businesses and governments realize their greatest potential.  Title and Summary  Lead Site Reliability <b>Engineer </b>\r\n Who is Mastercard? \r\n At Mastercard technology, we work to connect and power an inclusive, digital economy that benefits everyone...&nbsp;",
+      "link": "https://jooble.org/jdp/-4528289095339718977",
       "source": "Indeed/Jooble"
     },
     {
       "id": "job-10",
+      "title": "Sr Channel Marketing Specialist",
+      "company": "Honeywell",
+      "location": "India",
+      "stipend": "Not listed",
+      "jd": "&nbsp;...shortened or extended depending on business needs and the availability of qualified candidates. \r\n ABOUT HONEYWELL \r\n Honeywell <b>International </b>Inc. (Nasdaq: HON) invents and commercializes technologies that address some of the world's most critical challenges around energy...&nbsp;",
+      "link": "https://jooble.org/jdp/-7552886220112133161",
+      "source": "Indeed/Jooble"
+    },
+    {
+      "id": "job-11",
       "title": "Manager, Communications and Engagement",
       "company": "Mastercard",
       "location": "India",
@@ -112,7 +122,7 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-11",
+      "id": "job-12",
       "title": "Senior Platform Engineer",
       "company": "Mastercard",
       "location": "India",
@@ -122,17 +132,17 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-12",
-      "title": "Commission-Based Retail Sales Associate - Verizon",
+      "id": "job-13",
+      "title": "Retail Sales Representative - Verizon",
       "company": "Verizon",
       "location": "India",
       "stipend": "$16 - $21 per hour",
       "jd": "&nbsp;...of both \r\n~ Sales recognition programs that have, in the past, awarded top performers with all inclusive travel to domestic and <b>international </b>destinations, gifts, and other incentives \r\n~ Five weeks of paid time off (vacation, holidays, personal days)\r\n~8 weeks of paid...&nbsp;",
-      "link": "https://jooble.org/jdp/-4479972336589521080",
+      "link": "https://jooble.org/jdp/-117420195763343194",
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-13",
+      "id": "job-14",
       "title": "Senior Analyst, Mastercard Value Quantification (MVQ) Program",
       "company": "Mastercard",
       "location": "India",
@@ -142,7 +152,7 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-14",
+      "id": "job-15",
       "title": "Senior Software Engineer-2",
       "company": "Mastercard",
       "location": "India",
@@ -152,7 +162,7 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-15",
+      "id": "job-16",
       "title": "Software Engineer II",
       "company": "Mastercard",
       "location": "India",
@@ -162,7 +172,7 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-16",
+      "id": "job-17",
       "title": "Software Engineer II",
       "company": "Mastercard",
       "location": "India",
@@ -172,23 +182,13 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-17",
+      "id": "job-18",
       "title": "Senior Specialist",
       "company": "Mastercard",
       "location": "India",
       "stipend": "Not listed",
       "jd": "&nbsp;...and reimbursement processes \r\n\u2022 Partner with GBSC, regional, and business stakeholders to ensure alignment with company policies, <b>internal </b>controls, and T&E compliance requirements \r\n\u2022 Act as a subject matter expert for expense reporting systems (e.g., SAP Concur), supporting...&nbsp;",
       "link": "https://jooble.org/jdp/-251022995934321030",
-      "source": "Indeed/Jooble"
-    },
-    {
-      "id": "job-18",
-      "title": "Manager, Deal Management",
-      "company": "Mastercard",
-      "location": "India",
-      "stipend": "Not listed",
-      "jd": "&nbsp;...stakeholders \r\n Establish mutually quantifiable goals that drive profitability for Mastercard and customers. \r\n Fully understand <b>internal </b>guidelines, pricing, regulatory environment, business environment and apply already established measures to drive profitability for...&nbsp;",
-      "link": "https://jooble.org/jdp/-7286985345172634173",
       "source": "Indeed/Jooble"
     },
     {
@@ -258,7 +258,7 @@
       "location": "India",
       "stipend": "Not listed",
       "jd": "&nbsp;...and services that help people, businesses and governments realize their greatest potential.  Title and Summary  Site Reliability <b>Engineer </b>II \r\n Who is Mastercard? \r\n At Mastercard technology, we work to connect and power an inclusive, digital economy that benefits everyone...&nbsp;",
-      "link": "https://jooble.org/jdp/8947571581858987095",
+      "link": "https://jooble.org/jdp/7141751104672379349",
       "source": "Indeed/Jooble"
     },
     {
@@ -293,6 +293,16 @@
     },
     {
       "id": "job-29",
+      "title": "Senior Field Applications Engineer",
+      "company": "Shield AI",
+      "location": "India",
+      "stipend": "Not listed",
+      "jd": "&nbsp;...include the V-BAT aircraft, Hivemind Enterprise, and the Hivemind <b>Vision </b>product lines. With nine offices and facilities across the U.S....&nbsp;&nbsp;...REQUIRED QUALIFICATIONS: \r\n~ Bachelor\u2019s degree in Engineering, <b>Computer </b>Science, or a related field.\u00a0\r\n~4+ years of experience of...&nbsp;",
+      "link": "https://jooble.org/jdp/-1785275543396309125",
+      "source": "Indeed/Jooble"
+    },
+    {
+      "id": "job-30",
       "title": "Senior Software Engineer-1",
       "company": "Mastercard",
       "location": "India",
@@ -302,7 +312,7 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-30",
+      "id": "job-31",
       "title": "Senior Data Scientist",
       "company": "Mastercard",
       "location": "India",
@@ -312,23 +322,13 @@
       "source": "Indeed/Jooble"
     },
     {
-      "id": "job-31",
+      "id": "job-32",
       "title": "Senior Software Engineer",
       "company": "Mastercard",
       "location": "India",
       "stipend": "Not listed",
       "jd": "&nbsp;...the challenges of a truly global network. With the talent and <b>vision </b>to create the critical systems and products that power global commerce...&nbsp;&nbsp;...project teams. \r\n\u00b7 Superior academic record with a degree in <b>Computer </b>Science or related technical field. \r\n\u00b7 Strong written and...&nbsp;",
       "link": "https://jooble.org/jdp/4140750964162815339",
-      "source": "Indeed/Jooble"
-    },
-    {
-      "id": "job-32",
-      "title": "Senior Product Manager - Technical",
-      "company": "Mastercard",
-      "location": "India",
-      "stipend": "Not listed",
-      "jd": "&nbsp;...collaborator with the Platform team to shape the long-term technical <b>vision </b>for the product and ensure efficient development execution....&nbsp;&nbsp;...or relevant experience \r\n\u2022 Technical background (e.g., <b>Computer </b>Science or related field) a plus \r\n\u2022 Experience in the payments...&nbsp;",
-      "link": "https://jooble.org/jdp/-6114201603783786802",
       "source": "Indeed/Jooble"
     }
   ]
